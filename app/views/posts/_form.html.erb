@@ -1,17 +1,14 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for(post_form) do |f|%>
+  <%=f.error_notification%>
+  <div class="field">
+    <div class="control">
+      <%= f.input :tweet, label: "Tweet about it", 
+          input_html: { class: "textarea "}, 
+          wrapper: false, 
+          label_html: {class: "label"}, 
+          placeholder: "Compose a new tweet...",
+          autofocus: true %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.submit %>
   </div>
+  <%= f.button :submit, class: "button is-info"%>
 <% end %>

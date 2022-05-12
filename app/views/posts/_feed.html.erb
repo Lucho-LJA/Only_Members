@@ -1,0 +1,54 @@
+<div class="column is-half">
+    <% if user_signed_in? %>
+        <article class="media box">
+        <!--
+            <figure class="media-left">
+                <p class="image is-64x64">
+                    <%= gravatar_image_tag(current_user.email, size:64, alt:current_user.name)%>
+                </p>
+            </figure>
+        -->
+            <div class="media-content">
+                <%= render 'posts/form', post_form: post %>
+            </div>
+        </article>
+    <% end %>
+
+
+    <% posts.each do |post_feed| %>
+        <div class="box">
+            <article class="media">
+            <!--
+                <div class="media-left">
+                    <figure class="image is-64x64">
+                        <%= gravatar_image_tag(post_feed.user.email, size:64, alt:post_feed.user.name)%>
+                    </figure>
+                </div>
+            -->
+                <div class="media-content">
+                    <div class = "content">
+                        <strong><%= post_feed.user.name %></strong><br/>
+                        <small>@<%= post_feed.user.username %></small><br/>
+                        <p><%= post_feed.post_feed%></p>
+                    </div>
+                    <% if user_signed_in? %>
+                    <nav class="level">
+                        <div class="level-left is-mobile">
+                            <%= link_to post_feed, class: "level-item" do %>
+                                <span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
+                            <% end %>
+                            <%= link_to edit_post_feed_path(post_feed), class: "level-item" do %>
+                                <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                            <% end %>
+                            <%= link_to post_feed, data: {"turbo-method": :delete, confirm: "Are you sure you want to delete post?"
+                            } do %>
+                                <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                            <% end %>
+                        </div>  
+                    </nav>
+                    <% end %>
+                </div>
+            </article>
+        </div>     
+    <% end %>
+</div>
