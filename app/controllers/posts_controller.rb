@@ -10,6 +10,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    
+    redirect_to root_path
   end
 
   # GET /posts/new
