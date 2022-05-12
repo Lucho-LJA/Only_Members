@@ -9,7 +9,7 @@
         :put}) do |f| %>
           <%= f.error_notification %>
 
-          <%= f.input :reset_password_token, :as :hidden %>
+          <%= f.input :reset_password_token, as: :hidden %>
           <%= f.full_error :reset_password_token %>
 
           <div class="field">
@@ -28,7 +28,7 @@
           <div class="field">
             <div class="control">
               <%= f.input :password_confirmation,
-                    label: "Confirn your New Password"
+                    label: "Confirn your New Password",
                     required: true,
                     input_html: { class: "input" },
                     wrapper: false,
