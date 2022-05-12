@@ -1,10 +1,50 @@
-<p style="color: green"><%= notice %></p>
+<div class="box">
+  <article class="media">
+    <!--
+    <div class="media-left">
+      <figure class="image is-64x64">
+                      
+      </figure>
+    </div>
+    -->
+    <div class="media-content">
+      <% if user_signed_in? %>
+        <div class = "content">
+          <strong><%= @post.user.name %></strong>
+          <small>@<%= @post.user.username %></small><br/>
+        </div>
+        <% if current_user.id == @post.user_id %>           
+          <nav class="level">
+            <div class="level-left is-mobile">
+              <%= link_to edit_post_path(@post), class: "level-item" do %>
+                <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+              <% end %>
+              <%= link_to @post, data: {"turbo-method": :delete, turbo_confirm: "Are you sure you want to delete post?"
+                      } do %>
+                <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+              <% end %>
+            </div>  
+          </nav>
+        <% end %>
+      <% end %>
+      <div class="content" style='text-align:center' >
+        <strong><%= @post.title %></strong>
+      </div>
+      <div class="content">
+        <p><%= @post.post%></p>
+      </div>
+    </div>
+  </article>
+</div>  
+<nav class="navbar is-fixed-bottom">
+  <div class="navbar-menu">
+    <div class="navbar-item">
+      <div class="field is-grouped">
+        <p class="control">
+          <%= link_to 'Return', root_path, class:"button is-dark" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</nav>   
 
-<%= render @post %>
-
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
-</div>

@@ -1,4 +1,4 @@
-<div class="column is-half">
+<div class="column ">
     <% if user_signed_in? %>
         <article class="media box">
         <!--
@@ -26,28 +26,33 @@
                 </div>
             -->
                 <div class="media-content">
-                    <div class = "content">
-                        <strong><%= post_feed.user.name %></strong>
-                        <small>@<%= post_feed.user.username %></small><br/>
+                    <% if user_signed_in? %>
+                        <div class = "content">
+                            <strong><%= post_feed.user.name %></strong>
+                            <small>@<%= post_feed.user.username %></small><br/>
+                        </div>
+                    <% end %>
+                    <div class="content">
                         <strong><%= post_feed.title %></strong>
                         <p><%= post_feed.post%></p>
                     </div>
-                    <% if user_signed_in? %>
                     <nav class="level">
                         <div class="level-left is-mobile">
                             <%= link_to post_feed, class: "level-item" do %>
                                 <span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
                             <% end %>
-                            <%= link_to edit_post_path(post_feed), class: "level-item" do %>
-                                <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                            <% end %>
-                            <%= link_to post_feed, data: {"turbo-method": :delete, confirm: "Are you sure you want to delete post?"
-                            } do %>
-                                <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                            <% if user_signed_in? and current_user.id == post_feed.user_id %>
+                                <%= link_to edit_post_path(post_feed), class: "level-item" do %>
+                                    <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                <% end %>
+                                <%= link_to post_feed, data: {"turbo-method": :delete, turbo_confirm: "Are you sure you want to delete post?"
+                                } do %>
+                                    <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                                <% end %>
                             <% end %>
                         </div>  
                     </nav>
-                    <% end %>
+                    
                 </div>
             </article>
         </div>     
