@@ -27,9 +27,10 @@
             -->
                 <div class="media-content">
                     <div class = "content">
-                        <strong><%= post_feed.user.name %></strong><br/>
+                        <strong><%= post_feed.user.name %></strong>
                         <small>@<%= post_feed.user.username %></small><br/>
-                        <p><%= post_feed.post_feed%></p>
+                        <strong><%= post_feed.title %></strong>
+                        <p><%= post_feed.post%></p>
                     </div>
                     <% if user_signed_in? %>
                     <nav class="level">
@@ -37,7 +38,7 @@
                             <%= link_to post_feed, class: "level-item" do %>
                                 <span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
                             <% end %>
-                            <%= link_to edit_post_feed_path(post_feed), class: "level-item" do %>
+                            <%= link_to edit_post_path(post_feed), class: "level-item" do %>
                                 <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                             <% end %>
                             <%= link_to post_feed, data: {"turbo-method": :delete, confirm: "Are you sure you want to delete post?"
